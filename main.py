@@ -4,7 +4,6 @@ from random import randint
 names = []
 scores = []
 words = ["deal","power","shape","eaten","drank","apple","grind","it\'s"]
-points = -1
 players = int(input('player count? (2 to 8)'))
 word_chain = ''
 last_word = words[randint(0,7)]
@@ -26,17 +25,17 @@ for i in range (players):
  names.append(input(f'player {i+1}\'s name?'))
 
 for i in range (players*rounds):
+ points = 0
  clear_console()
  word_chain = word_chain + last_word
  player_up = i % players
  print(f'{names[player_up]} is up!')
  print(f'round {i//players + 1} out of {rounds}')
  word = input(last_word)
- points = 0
  for j in range (players):
   if not(j == player_up):
    like = input(f'{names[j]}, do you like it? (y/n):')
-   points =+ (1 if like == 'y' else -1)
+   points += int(1 if like == 'y' else -1)
  scores[player_up] += points
  last_word = word if points > -1 else words[randint(0,7)]
 
